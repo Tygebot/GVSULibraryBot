@@ -4,9 +4,9 @@ import numpy as np
 import cv2
 import io
 from database_methods import *
-from bot_key import api_key
+from bot_key import trust
 
-openai.api_key = api_key
+openai.api_key = trust
 
 def get_chatgpt_response(prompt):
     try:
