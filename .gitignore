@@ -1,2 +1,4 @@
 bot_key.py
-__pychache__/
+__pycache__/
+*.pyc
+*.pyo

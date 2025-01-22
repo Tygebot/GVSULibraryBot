@@ -215,7 +215,7 @@ def search_card_logic(
         
         # Check if the user input for 'search_by' is valid
         if search_by not in valid_attributes:
-            return(f"Invalid search attribute. Please choose from {', '.join(valid_attributes)}."), False
+            return f"Invalid search attribute. Please choose from {', '.join(valid_attributes)}.", False, 'arg'
 
         # Build SQL query to search
         conn = get_db_connection()
@@ -227,7 +227,7 @@ def search_card_logic(
                 cursor.execute(f"SELECT * FROM cards WHERE {search_by} = ?", (search_value,))
             except ValueError:        
                 conn.close()
-                return (f"Please provide a valid integer for {search_by}."), False
+                return f"Please provide a valid integer for {search_by}.", False, 'arg'
         else:  # For string fields, use LIKE for partial matching
             cursor.execute(f"SELECT * FROM cards WHERE {search_by} LIKE ?", ('%' + search_value + '%',))
 
@@ -266,9 +266,9 @@ def search_card_logic(
                     card_list += f"Mana Cost: {card['mana_cost']} | Power/Toughness: {card['power_and_toughness'] if card['power_and_toughness'] else 'N/A'}\n"
                     card_list += f"Text:\n {card['text'] or 'No text available'}\n\n"
 
-                return (f"Found {len(cards)} cards:\n{card_list}"), False
+                return (f"Found {len(cards)} cards:\n{card_list}"), False, 'arg'
         else:
-            return(f"No cards found with {search_by} matching '{search_value}'."), False
+            return(f"No cards found with {search_by} matching '{search_value}'."), False, 'arg'
     
     except Exception as e:
         error_message = f"<@&1313626558304616572> error in vote, {e}"

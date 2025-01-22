@@ -343,7 +343,7 @@ async def on_message(message):
                     else:
                         await message.channel.send(embed=embed)
     except Exception as e:
-        error_message = f"<@&1313626558304616572> error in add_card, {e}"
+        error_message = f"<@&1313626558304616572> error in on message, {e}"
         await message.channel.send(error_message)
 
 @bot.tree.command(name="help", description="List all available commands with descriptions")
